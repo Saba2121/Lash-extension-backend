@@ -18,22 +18,31 @@ public class DataBaseService {
 
     public static List<AvailableHoursLongDto> getAvailableHours() {
         workHours.stream()
-                .forEach(availableHoursLongDto -> deleteBussyHours(availableHoursLongDto));
+                .forEach(availableHoursLongDto -> deleteBusyHours(availableHoursLongDto));
 
         return workHours;
     }
 
-    private static void deleteBussyHours(AvailableHoursLongDto availableHoursLongDto) {
+    private static void deleteBusyHours(AvailableHoursLongDto availableHoursLongDto) {
         List<Integer> hours = availableHoursLongDto.getHours().stream()
                 .filter(workHour -> isAvailableHour(availableHoursLongDto.getDateTimeStamp(), workHour))
                 .collect(Collectors.toList());
 
         availableHoursLongDto.setHours(hours);
-
-
     }
 
     private static boolean isAvailableHour(Long timestamp, Integer workHour) {
+
+        Long availableHourTimestamp = timestamp + (workHour * 60 * 3600 * 1000);
+
+//        visits.stream()
+//                .filter(visitDto -> visitDto.getVisitTimestamp().equals(availableHourTimestamp))
+//                .findFirst()
+//                .isPresent();
+
+        return visits.stream()
+                .noneMatch(visitDto -> visitDto.getVisitTimestamp().equals(availableHourTimestamp));
+
 
     }
 
