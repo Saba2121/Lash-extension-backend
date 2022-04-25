@@ -19,7 +19,6 @@ public class VisitsController {
         System.out.println("visit = " + visitDto.getName() + " " + visitDto.getSurname() + " " + visitDto.getNumberPhone()
                 + " " + visitDto.getVisitTimestamp() + " " + visitDto.getEffectType() + " " + visitDto.getVariant());
 
-
         Boolean visitExist = DataBaseService.visits.stream()
                 .anyMatch(visitDto1 -> visitDto1.getVisitTimestamp().equals(visitDto.getVisitTimestamp()));
 

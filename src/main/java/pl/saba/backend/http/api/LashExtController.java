@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import pl.saba.backend.domain.model.EffectType;
-import pl.saba.backend.domain.service.LashExtService;
+import pl.saba.backend.domain.service.LashExtRepository;
 import pl.saba.backend.http.dto.LashExtDto;
 
 import java.util.List;
@@ -15,16 +15,16 @@ import java.util.List;
 @RestController
 public class LashExtController {
 
-    private LashExtService lashExtService;
+    private LashExtRepository lashExtRepository;
 
-    public LashExtController(LashExtService lashExtService) {
-        this.lashExtService = lashExtService;
+    public LashExtController(LashExtRepository lashExtRepository) {
+        this.lashExtRepository = lashExtRepository;
     }
 
     @GetMapping("/styles")
     public ResponseEntity<List<LashExtDto>> getStyles(
             @RequestParam("effect-type") EffectType effectType) {
-        List<LashExtDto> styles = lashExtService.getStyles(effectType);
+        List<LashExtDto> styles = lashExtRepository.getStyles(effectType);
         return ResponseEntity.ok(styles);
 
     }

@@ -8,6 +8,7 @@ import pl.saba.backend.http.dto.AnimalDto;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RequestMapping(value = "/api/v1/")
 @RestController
@@ -28,16 +29,16 @@ public class AnimalsController {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-//    @DeleteMapping("/animals/{id}")
-//    public ResponseEntity<Void> deleteAnimal(@PathVariable("id") Integer id){
-//
-//        Optional <AnimalDto> animalDtoOpt = animals.stream()
-//                .filter(animalDto1 -> animalDto1.getId().equals(id))
-//                .findFirst();
-//        animalDtoOpt.ifPresent(animalDto -> animals.remove(animalDto));
-//
-//        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-//    }
+    @DeleteMapping("/animals/{id}")
+    public ResponseEntity<Void> deleteAnimal(@PathVariable("id") Integer id) {
+
+        Optional<AnimalDto> animalDtoOpt = animals.stream()
+                .filter(animalDto1 -> animalDto1.getId().equals(id))
+                .findFirst();
+        animalDtoOpt.ifPresent(animalDto -> animals.remove(animalDto));
+
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
 
 
 }

@@ -33,7 +33,7 @@ public class DataBaseService {
 
     private static boolean isAvailableHour(Long timestamp, Integer workHour) {
 
-        Long availableHourTimestamp = timestamp + (workHour * 60 * 3600 * 1000);
+        Long availableHourTimestamp = timestamp + (workHour * 60 * 60 * 1000);
 
 //        visits.stream()
 //                .filter(visitDto -> visitDto.getVisitTimestamp().equals(availableHourTimestamp))

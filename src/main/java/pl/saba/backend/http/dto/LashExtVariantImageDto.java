@@ -9,13 +9,8 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class AnimalDto {
-    private Integer id;
-    private String type;
-    private String breed;
-    private String name;
-    private String color;
+public class LashExtVariantImageDto {
+
+    private String variant;
+    private String image;
 }
-
-
-
