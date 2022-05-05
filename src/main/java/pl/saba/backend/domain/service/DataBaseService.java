@@ -1,7 +1,9 @@
 package pl.saba.backend.domain.service;
 
 import org.springframework.stereotype.Service;
+import pl.saba.backend.domain.model.EffectType;
 import pl.saba.backend.http.dto.AvailableHoursLongDto;
+import pl.saba.backend.http.dto.LashExtDto;
 import pl.saba.backend.http.dto.VisitDto;
 
 import java.util.ArrayList;
@@ -15,6 +17,8 @@ public class DataBaseService {
     public static List<Date> holidayDays = new ArrayList<>();
     public static List<AvailableHoursLongDto> workHours = new ArrayList<>();
     public static List<VisitDto> visits = new ArrayList<>();
+    public static List<LashExtDto> styles = new ArrayList<>();
+
 
     public static List<AvailableHoursLongDto> getAvailableHours() {
         workHours.stream()
@@ -46,5 +50,12 @@ public class DataBaseService {
 
     }
 
+    public static List<LashExtDto> getFilteredStyles(EffectType effectType) {
+        List<LashExtDto> filteredStyles = styles.stream()
+                .filter(lashExtDto -> lashExtDto.getEffectType().equals(effectType))
+                .collect(Collectors.toList());
+
+        return filteredStyles;
+    }
 
 }

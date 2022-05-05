@@ -11,7 +11,7 @@ import java.util.List;
 
 @RequestMapping(value = "/api/v1/")
 @RestController
-public class VisitsController {
+public class LashExtVisitsController {
 
 
     @PostMapping("/visits")
@@ -30,6 +30,7 @@ public class VisitsController {
             return ResponseEntity.status(HttpStatus.CREATED).build();
 
         }
+
 
 //        Optional<VisitDto> visitDtoOpt = visits.stream()
 //                 .filter(visitDto1 -> visitDto1.getVisitTimestamp().equals(visitDto.getVisitTimestamp()))
