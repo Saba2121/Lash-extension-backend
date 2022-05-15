@@ -4,6 +4,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.saba.backend.domain.service.DataBaseService;
+import pl.saba.backend.domain.service.VisitService;
 import pl.saba.backend.http.dto.VisitDto;
 
 import java.util.List;
@@ -13,6 +14,12 @@ import java.util.List;
 @RestController
 public class LashExtVisitsController {
 
+    private final VisitService visitService;
+
+    public LashExtVisitsController(VisitService visitService) {
+        this.visitService = visitService;
+
+    }
 
     @PostMapping("/visits")
     public ResponseEntity<Void> addVisit(@RequestBody VisitDto visitDto) {
@@ -26,7 +33,7 @@ public class LashExtVisitsController {
             return ResponseEntity.status(434).build();
 
         } else {
-            DataBaseService.visits.add(visitDto);
+            visitService.addVisit(visitDto);
             return ResponseEntity.status(HttpStatus.CREATED).build();
 
         }

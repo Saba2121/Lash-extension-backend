@@ -1,0 +1,18 @@
+server:
+  port: 8080
+spring:
+  jpa:
+    database: postgresql
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        jdbc:
+          time_zone: UTC
+  datasource:
+    platform: postgres
+    url: jdbc:postgresql://localhost:5432/lash-extension
+    username: postgres
+    password: SabaBazaDanych
+    driver-class-name: org.postgresql.Driver
+
