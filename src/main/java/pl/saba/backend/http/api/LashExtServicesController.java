@@ -5,19 +5,19 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.saba.backend.domain.model.EffectType;
 import pl.saba.backend.domain.service.DataBaseService;
-import pl.saba.backend.domain.service.StyleService;
+import pl.saba.backend.domain.service.ServiceService;
 import pl.saba.backend.http.dto.LashExtDto;
 
 import java.util.List;
 
 @RequestMapping(value = "/api/v1/")
 @RestController
-public class LashExtStylesController {
+public class LashExtServicesController {
 
-    private final StyleService styleService;
+    private final ServiceService serviceService;
 
-    public LashExtStylesController(StyleService styleService) {
-        this.styleService = styleService;
+    public LashExtServicesController(ServiceService serviceService) {
+        this.serviceService = serviceService;
     }
 
     @GetMapping("/styles")
@@ -28,7 +28,7 @@ public class LashExtStylesController {
 
     @PostMapping("/styles")
     public ResponseEntity<Void> addStyle(@RequestBody LashExtDto lashExtDto) {
-        styleService.addStyle(lashExtDto);
+        serviceService.addStyle(lashExtDto);
         System.out.println("styles: " + lashExtDto.getLashExtName() + " " + lashExtDto.getLashExtPrice()
                 + " " + lashExtDto.getLashExtVariant() + " " + lashExtDto.getLashExtTime() + " " + lashExtDto.getLashExtImageBase64()
                 + " " + lashExtDto.getEffectType());

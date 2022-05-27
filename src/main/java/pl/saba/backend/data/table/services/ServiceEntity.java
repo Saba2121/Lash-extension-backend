@@ -1,4 +1,4 @@
-package pl.saba.backend.data.table.styles;
+package pl.saba.backend.data.table.services;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,30 +13,29 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Getter
 @Setter
-public class StyleEntity {
+public class ServiceEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
 
-    @Column(name = "lashExtName")
+    @Column(name = "lash_ext_name")
     private String lashExtName;
 
-    @Column(name = "lashExtImageBase64")
+    @Column(name = "lash_ext_image_base_64", columnDefinition = "TEXT")
     private String lashExtImageBase64;
 
-    @Column(name = "lashExtPrice")
+    @Column(name = "lash_ext_price")
     private String lashExtPrice;
 
-    @Column(name = "lashExtTime")
+    @Column(name = "lash_ext_time")
     private String lashExtTime;
 
-    @Column(name = "lashExtVariant")
+    @Column(name = "lash_ext_variant")
     private String lashExtVariant;
 
-    @Column(name = "effectType")
+    @Column(name = "effect_type")
     private String effectType;
-
 
 }

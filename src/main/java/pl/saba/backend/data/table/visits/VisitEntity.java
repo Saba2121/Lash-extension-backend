@@ -14,6 +14,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 public class VisitEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -25,13 +26,15 @@ public class VisitEntity {
     @Column(name = "surname")
     private String surname;
 
-    @Column(name = "numberPhone")
+    @Column(name = "number_phone")
     private String numberPhone;
 
-    @Column(name = "visitTimestamp")
+    //    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "visit_timestamp")
     private Long visitTimestamp;
+//    private Date visitTimestamp;
 
-    @Column(name = "effectType")
+    @Column(name = "effect_type")
     private String effectType;
 
     @Column(name = "variant")

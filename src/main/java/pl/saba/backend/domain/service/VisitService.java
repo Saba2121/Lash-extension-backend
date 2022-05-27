@@ -16,9 +16,9 @@ public class VisitService {
 
     public void addVisit(VisitDto visitDto) {
 
-        VisitEntity visitEntity = new VisitEntity(null, visitDto.getName(),
-                visitDto.getSurname(), visitDto.getNumberPhone(), visitDto.getVisitTimestamp(),
-                visitDto.getEffectType().name(), visitDto.getVariant());
+        VisitEntity visitEntity = new VisitEntity(null, visitDto.getName(), visitDto.getSurname(),
+                visitDto.getNumberPhone(), visitDto.getVisitTimestamp(), visitDto.getEffectType().name(),
+                visitDto.getVariant());
 
         visitEntityJpaRepository.save(visitEntity);
     }
