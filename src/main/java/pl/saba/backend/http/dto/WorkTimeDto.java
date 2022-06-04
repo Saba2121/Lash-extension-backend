@@ -16,7 +16,7 @@ import java.util.List;
 public class WorkTimeDto {
 
     private List<Date> holidayDates;
-    private List<AvailableHoursLongDto> availableHours;
+    private List<WorkHourDto> availableHours;
 
 }
 

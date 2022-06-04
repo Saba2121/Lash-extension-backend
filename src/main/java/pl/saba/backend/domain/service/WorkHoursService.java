@@ -4,8 +4,10 @@ package pl.saba.backend.domain.service;
 import org.springframework.stereotype.Service;
 import pl.saba.backend.data.table.workHours.WorkHoursEntity;
 import pl.saba.backend.data.table.workHours.WorkHoursEntityJpaRepository;
-import pl.saba.backend.http.dto.AvailableHoursLongDto;
+import pl.saba.backend.domain.utils.StringUtils;
+import pl.saba.backend.http.dto.WorkHourDto;
 
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -18,22 +20,19 @@ public class WorkHoursService {
         this.workHoursEntityJpaRepository = workHoursEntityJpaRepository;
     }
 
-    public void addWorkHours(AvailableHoursLongDto availableHoursLongDto) {
-
-        WorkHoursEntity workHoursEntity = new WorkHoursEntity(null, availableHoursLongDto.getDateTimeStamp(),
-                mapToString(availableHoursLongDto.getHours()));
-
+    public void addWorkHours(WorkHourDto workHourDto) {
+        WorkHoursEntity workHoursEntity = new WorkHoursEntity(null, new Date(),
+                mapToString(workHourDto.getHours()));
         workHoursEntityJpaRepository.save(workHoursEntity);
 
     }
 
-    public List<AvailableHoursLongDto> getAllAvailableHours() {
-
+    public List<WorkHourDto> getAllAvailableHours() {
         List<WorkHoursEntity> workHoursEntities = workHoursEntityJpaRepository.findAll();
-        List<AvailableHoursLongDto> availableHours = workHoursEntities.stream()
-                .map(workHoursEntity -> new AvailableHoursLongDto())
+        List<WorkHourDto> availableHours = workHoursEntities.stream()
+                .map(workHoursEntity -> new WorkHourDto(workHoursEntity.getDateTimeStamp().getTime(),
+                        StringUtils.convertToIntegersByComma(workHoursEntity.getHours())))
                 .collect(Collectors.toList());
-
         return availableHours;
     }
 
@@ -42,14 +41,9 @@ public class WorkHoursService {
         List<String> hourAsString = hours.stream()
                 .map(integer -> integer.toString())
                 .collect(Collectors.toList());
-
         return String.join(",", hourAsString);
 
     }
-//    private Date mapToDate(Long dateTimeStamp){
-//
-//
-//
-//    }
+
 
 }

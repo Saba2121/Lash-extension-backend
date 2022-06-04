@@ -2,9 +2,9 @@ package pl.saba.backend.domain.service;
 
 import org.springframework.stereotype.Service;
 import pl.saba.backend.domain.model.EffectType;
-import pl.saba.backend.http.dto.AvailableHoursLongDto;
 import pl.saba.backend.http.dto.LashExtDto;
 import pl.saba.backend.http.dto.VisitDto;
+import pl.saba.backend.http.dto.WorkHourDto;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -15,24 +15,24 @@ import java.util.stream.Collectors;
 public class DataBaseService {
 
     public static List<Date> holidayDays = new ArrayList<>();
-    public static List<AvailableHoursLongDto> workHours = new ArrayList<>();
+    public static List<WorkHourDto> workHours = new ArrayList<>();
     public static List<VisitDto> visits = new ArrayList<>();
     public static List<LashExtDto> styles = new ArrayList<>();
 
 
-    public static List<AvailableHoursLongDto> getAvailableHours() {
+    public static List<WorkHourDto> getAvailableHours() {
         workHours.stream()
-                .forEach(availableHoursLongDto -> deleteBusyHours(availableHoursLongDto));
+                .forEach(workHourDto -> deleteBusyHours(workHourDto));
 
         return workHours;
     }
 
-    private static void deleteBusyHours(AvailableHoursLongDto availableHoursLongDto) {
-        List<Integer> hours = availableHoursLongDto.getHours().stream()
-                .filter(workHour -> isAvailableHour(availableHoursLongDto.getDateTimeStamp(), workHour))
+    private static void deleteBusyHours(WorkHourDto workHourDto) {
+        List<Integer> hours = workHourDto.getHours().stream()
+                .filter(workHour -> isAvailableHour(workHourDto.getDateTimeStamp(), workHour))
                 .collect(Collectors.toList());
 
-        availableHoursLongDto.setHours(hours);
+        workHourDto.setHours(hours);
     }
 
     private static boolean isAvailableHour(Long timestamp, Integer workHour) {

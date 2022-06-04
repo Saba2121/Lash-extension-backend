@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "workHours")
@@ -20,10 +21,9 @@ public class WorkHoursEntity {
     @Column(name = "id")
     private Integer id;
 
-    //    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "date_timestamp")
-    private Long dateTimeStamp;
-//    private Integer dateTimeStamp;
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "work_date")
+    private Date dateTimeStamp;
 
     @Column(name = "hours")
     private String hours;

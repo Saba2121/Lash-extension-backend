@@ -23,7 +23,7 @@ public class HolidayDaysEntity {
     private Integer id;
 
     @Temporal(TemporalType.DATE)
-    @Column(name = "date")
+    @Column(name = "holiday_date")
     private Date date;
 
 }

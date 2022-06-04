@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "visits")
@@ -29,10 +30,9 @@ public class VisitEntity {
     @Column(name = "number_phone")
     private String numberPhone;
 
-    //    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "visit_timestamp")
-    private Long visitTimestamp;
-//    private Date visitTimestamp;
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "visit_date")
+    private Date visitTimestamp;
 
     @Column(name = "effect_type")
     private String effectType;

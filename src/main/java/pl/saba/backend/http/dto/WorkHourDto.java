@@ -11,7 +11,7 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
-public class AvailableHoursLongDto {
+public class WorkHourDto {
 
     private Long dateTimeStamp;
     private List<Integer> hours;

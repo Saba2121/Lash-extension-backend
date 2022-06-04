@@ -9,7 +9,6 @@ import pl.saba.backend.http.dto.VisitDto;
 
 import java.util.List;
 
-
 @RequestMapping(value = "/api/v1/")
 @RestController
 public class LashExtVisitsController {
@@ -20,7 +19,7 @@ public class LashExtVisitsController {
         this.visitService = visitService;
 
     }
-
+//uzywane przez androida
     @PostMapping("/visits")
     public ResponseEntity<Void> addVisit(@RequestBody VisitDto visitDto) {
         System.out.println("visit = " + visitDto.getName() + " " + visitDto.getSurname() + " " + visitDto.getNumberPhone()
@@ -37,16 +36,6 @@ public class LashExtVisitsController {
             return ResponseEntity.status(HttpStatus.CREATED).build();
 
         }
-
-
-//        Optional<VisitDto> visitDtoOpt = visits.stream()
-//                 .filter(visitDto1 -> visitDto1.getVisitTimestamp().equals(visitDto.getVisitTimestamp()))
-//                 .findFirst();
-
-//        Boolean visitExist = visits.stream()
-//                .filter(visitDto1 -> visitDto1.getVisitTimestamp().equals(visitDto.getVisitTimestamp()))
-//                .findFirst()
-//                .isPresent();
 
     }
 
