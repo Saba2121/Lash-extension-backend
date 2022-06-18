@@ -1,4 +1,4 @@
-package pl.saba.backend.data.table.holidayDays;
+package pl.saba.backend.data.table.holidaydays;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 import pl.saba.backend.data.table.services.ServiceEntity;
 import pl.saba.backend.data.table.services.ServiceEntityJpaRepository;
 import pl.saba.backend.domain.model.EffectType;
-import pl.saba.backend.http.dto.LashExtDto;
+import pl.saba.backend.http.dtoandroid.LashExtDto;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -26,6 +26,14 @@ public class LashExtService {
 
         serviceEntityJpaRepository.save(serviceEntity);
 
+    }
+
+    public void deleteStyle(Integer id) {
+        boolean exist = serviceEntityJpaRepository.existsById(id);
+        if (exist) {
+            serviceEntityJpaRepository.deleteById(id);
+
+        }
     }
 
     public List<LashExtDto> getAllFilteredStyles(EffectType effectType) {

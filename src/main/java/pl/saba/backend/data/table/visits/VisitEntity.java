@@ -32,11 +32,15 @@ public class VisitEntity {
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "visit_date")
-    private Date visitTimestamp;
+    private Date visitDate;
 
     @Column(name = "effect_type")
     private String effectType;
 
     @Column(name = "variant")
     private String variant;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "created_at")
+    private Date createdAt;
 }

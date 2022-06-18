@@ -2,9 +2,9 @@ package pl.saba.backend.domain.service;
 
 import org.springframework.stereotype.Service;
 import pl.saba.backend.domain.model.EffectType;
-import pl.saba.backend.http.dto.LashExtDto;
-import pl.saba.backend.http.dto.VisitDto;
-import pl.saba.backend.http.dto.WorkHourDto;
+import pl.saba.backend.http.dtoandroid.LashExtDto;
+import pl.saba.backend.http.dtoandroid.VisitDto;
+import pl.saba.backend.http.dtoandroid.WorkHourDto;
 
 import java.util.ArrayList;
 import java.util.Date;

@@ -4,7 +4,8 @@ import org.springframework.stereotype.Service;
 import pl.saba.backend.data.table.visits.VisitEntity;
 import pl.saba.backend.data.table.visits.VisitEntityJpaRepository;
 import pl.saba.backend.domain.model.EffectType;
-import pl.saba.backend.http.dto.VisitDto;
+import pl.saba.backend.http.dtoandroid.VisitDto;
+import pl.saba.backend.http.dtoweb.VisitDateDto;
 
 import java.util.Date;
 import java.util.List;
@@ -19,28 +20,35 @@ public class VisitService {
         this.visitEntityJpaRepository = visitEntityJpaRepository;
     }
 
+    public List<VisitDateDto> getAllVisits() {
+        List<VisitEntity> visitEntities = visitEntityJpaRepository.findAll();
+        List<VisitDateDto> visitDateDtos = visitEntities.stream()
+                .map(visitEntity -> new VisitDateDto(visitEntity.getId(), visitEntity.getName(), visitEntity.getSurname(),
+                        visitEntity.getNumberPhone(), visitEntity.getVisitDate(),
+                        EffectType.valueOf(visitEntity.getEffectType()), visitEntity.getVariant(), visitEntity.getCreatedAt()))
+                .collect(Collectors.toList());
+        return visitDateDtos;
+    }
+
     public void addVisit(VisitDto visitDto) {
 
         Date date = new Date(visitDto.getVisitTimestamp());
 
         VisitEntity visitEntity = new VisitEntity(null, visitDto.getName(), visitDto.getSurname(),
                 visitDto.getNumberPhone(), date, visitDto.getEffectType().name(),
-                visitDto.getVariant());
+                visitDto.getVariant(), new Date());
 
         visitEntityJpaRepository.save(visitEntity);
     }
 
-    public List<VisitDto> getAllVisits() {
+    public void deleteVisit(Integer id) {
 
-        String effectType = "";
-        EffectType effectType1 = EffectType.valueOf(effectType);
+        boolean exist = visitEntityJpaRepository.existsById(id);
+        if (exist) {
+            visitEntityJpaRepository.deleteById(id);
 
-        List<VisitEntity> visitEntities = visitEntityJpaRepository.findAll();
-        List<VisitDto> visits = visitEntities.stream()
-                .map(visitEntity -> new VisitDto(visitEntity.getName(), visitEntity.getSurname(),
-                        visitEntity.getNumberPhone(), visitEntity.getVisitTimestamp().getTime(),
-                        effectType1, visitEntity.getVariant()))
-                .collect(Collectors.toList());
-        return visits;
+        }
     }
+
+
 }

@@ -1,4 +1,4 @@
-package pl.saba.backend.data.table.workHours;
+package pl.saba.backend.data.table.workhours;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -23,7 +23,7 @@ public class WorkHoursEntity {
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "work_date")
-    private Date dateTimeStamp;
+    private Date date;
 
     @Column(name = "hours")
     private String hours;

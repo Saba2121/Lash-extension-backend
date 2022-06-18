@@ -1,4 +1,4 @@
-package pl.saba.backend.http.dto;
+package pl.saba.backend.http.dtoweb;
 
 public class UserDataDto {
     private String name;

@@ -1,4 +1,4 @@
-package pl.saba.backend.data.table.workHours;
+package pl.saba.backend.data.table.workhours;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

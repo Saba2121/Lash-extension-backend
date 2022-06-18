@@ -1,4 +1,4 @@
-package pl.saba.backend.http.dto;
+package pl.saba.backend.http.dtoandroid;
 
 
 import lombok.AllArgsConstructor;

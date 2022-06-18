@@ -1,4 +1,4 @@
-package pl.saba.backend.http.dto;
+package pl.saba.backend.http.dtoweb;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

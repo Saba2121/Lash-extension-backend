@@ -1,4 +1,4 @@
-package pl.saba.backend.http.dto;
+package pl.saba.backend.http.dtoweb;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.NoArgsConstructor;

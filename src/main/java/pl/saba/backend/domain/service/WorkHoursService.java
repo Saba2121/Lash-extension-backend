@@ -2,10 +2,11 @@ package pl.saba.backend.domain.service;
 
 
 import org.springframework.stereotype.Service;
-import pl.saba.backend.data.table.workHours.WorkHoursEntity;
-import pl.saba.backend.data.table.workHours.WorkHoursEntityJpaRepository;
+import pl.saba.backend.data.table.workhours.WorkHoursEntity;
+import pl.saba.backend.data.table.workhours.WorkHoursEntityJpaRepository;
 import pl.saba.backend.domain.utils.StringUtils;
-import pl.saba.backend.http.dto.WorkHourDto;
+import pl.saba.backend.http.dtoandroid.WorkHourDto;
+import pl.saba.backend.http.dtoweb.WorkDateDto;
 
 import java.util.Date;
 import java.util.List;
@@ -27,13 +28,13 @@ public class WorkHoursService {
 
     }
 
-    public List<WorkHourDto> getAllAvailableHours() {
+    public List<WorkHourDto> getAllWorkHours() {
         List<WorkHoursEntity> workHoursEntities = workHoursEntityJpaRepository.findAll();
-        List<WorkHourDto> availableHours = workHoursEntities.stream()
-                .map(workHoursEntity -> new WorkHourDto(workHoursEntity.getDateTimeStamp().getTime(),
+        List<WorkHourDto> workHours = workHoursEntities.stream()
+                .map(workHoursEntity -> new WorkHourDto(workHoursEntity.getDate().getTime(),
                         StringUtils.convertToIntegersByComma(workHoursEntity.getHours())))
                 .collect(Collectors.toList());
-        return availableHours;
+        return workHours;
     }
 
     private String mapToString(List<Integer> hours) {
@@ -45,5 +46,22 @@ public class WorkHoursService {
 
     }
 
+    public List<WorkDateDto> getAllWorkTime() {
 
+        List<WorkHoursEntity> workHoursEntities = workHoursEntityJpaRepository.findAll();
+        List<WorkDateDto> workDateDtos = workHoursEntities.stream()
+                .map(workHoursEntity -> new WorkDateDto(workHoursEntity.getId(), workHoursEntity.getDate(),
+                        StringUtils.convertToIntegersByComma(workHoursEntity.getHours())))
+                .collect(Collectors.toList());
+
+        return workDateDtos;
+    }
+
+    public void deleteWorkHour(Integer id) {
+        boolean exist = workHoursEntityJpaRepository.existsById(id);
+        if (exist) {
+            workHoursEntityJpaRepository.deleteById(id);
+
+        }
+    }
 }

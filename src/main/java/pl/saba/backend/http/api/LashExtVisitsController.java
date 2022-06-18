@@ -5,7 +5,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.saba.backend.domain.service.DataBaseService;
 import pl.saba.backend.domain.service.VisitService;
-import pl.saba.backend.http.dto.VisitDto;
+import pl.saba.backend.http.dtoandroid.VisitDto;
+import pl.saba.backend.http.dtoweb.VisitDateDto;
 
 import java.util.List;
 
@@ -19,8 +20,9 @@ public class LashExtVisitsController {
         this.visitService = visitService;
 
     }
-//uzywane przez androida
-    @PostMapping("/visits")
+
+    //uzywane przez androida
+    @PostMapping("/android/visits")
     public ResponseEntity<Void> addVisit(@RequestBody VisitDto visitDto) {
         System.out.println("visit = " + visitDto.getName() + " " + visitDto.getSurname() + " " + visitDto.getNumberPhone()
                 + " " + visitDto.getVisitTimestamp() + " " + visitDto.getEffectType() + " " + visitDto.getVariant());
@@ -39,9 +41,16 @@ public class LashExtVisitsController {
 
     }
 
-    @GetMapping("/visits")
-    public ResponseEntity<List<VisitDto>> getVisits() {
-        return ResponseEntity.ok(DataBaseService.visits);
+    @GetMapping("/web/visits")
+    public ResponseEntity<List<VisitDateDto>> getVisits() {
+        return ResponseEntity.ok(visitService.getAllVisits());
+    }
+
+    @DeleteMapping("/web/visits/{id}")
+    public ResponseEntity<Void> deleteVisit(@PathVariable("id") Integer id) {
+        visitService.deleteVisit(id);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+
     }
 
 
