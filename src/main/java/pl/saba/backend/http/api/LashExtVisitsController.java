@@ -3,7 +3,6 @@ package pl.saba.backend.http.api;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pl.saba.backend.domain.service.DataBaseService;
 import pl.saba.backend.domain.service.VisitService;
 import pl.saba.backend.http.dtoandroid.VisitDto;
 import pl.saba.backend.http.dtoweb.VisitDateDto;
@@ -27,7 +26,7 @@ public class LashExtVisitsController {
         System.out.println("visit = " + visitDto.getName() + " " + visitDto.getSurname() + " " + visitDto.getNumberPhone()
                 + " " + visitDto.getVisitTimestamp() + " " + visitDto.getEffectType() + " " + visitDto.getVariant());
 
-        Boolean visitExist = DataBaseService.visits.stream()
+        Boolean visitExist = visitService.getAllVisits().stream()
                 .anyMatch(visitDto1 -> visitDto1.getVisitTimestamp().equals(visitDto.getVisitTimestamp()));
 
         if (visitExist) {
@@ -42,8 +41,9 @@ public class LashExtVisitsController {
     }
 
     @GetMapping("/web/visits")
-    public ResponseEntity<List<VisitDateDto>> getVisits() {
-        return ResponseEntity.ok(visitService.getAllVisits());
+    public ResponseEntity<List<VisitDateDto>> getVisits(@RequestParam("from") String dateFrom, @RequestParam("to") String dateTo) {
+        List<VisitDateDto> dates = visitService.getAllVisits(dateFrom, dateTo);
+        return ResponseEntity.ok(dates);
     }
 
     @DeleteMapping("/web/visits/{id}")

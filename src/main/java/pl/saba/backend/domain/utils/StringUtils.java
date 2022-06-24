@@ -1,7 +1,10 @@
 package pl.saba.backend.domain.utils;
 
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -16,23 +19,15 @@ public class StringUtils {
 
         return arrayList;
     }
-//    public static List<Integer> convertToInteger(String string) {
 
-//        ArrayList<Integer> list = new ArrayList<Integer>();
-//        for (String str: string.split(","))
-//            list.add(Integer.parseInt(str));
-
-
-//        Scanner scanner = new Scanner(string);
-//        List<Integer> list = new ArrayList<Integer>();
-//        while (scanner.hasNextInt()) {
-//            list.add(scanner.nextInt());
-//        }
-
-
-//        List<Integer> list = Arrays.stream()
-//                .map(s -> Integer.parseInt())
-//                .collect(Collectors.toList());
-//    }
+    public static Date convertStringToDate(String date) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        try {
+            return sdf.parse(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+    }
 }
 

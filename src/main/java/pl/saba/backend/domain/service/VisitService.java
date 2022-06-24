@@ -1,9 +1,11 @@
 package pl.saba.backend.domain.service;
 
+
 import org.springframework.stereotype.Service;
 import pl.saba.backend.data.table.visits.VisitEntity;
 import pl.saba.backend.data.table.visits.VisitEntityJpaRepository;
 import pl.saba.backend.domain.model.EffectType;
+import pl.saba.backend.domain.utils.StringUtils;
 import pl.saba.backend.http.dtoandroid.VisitDto;
 import pl.saba.backend.http.dtoweb.VisitDateDto;
 
@@ -22,12 +24,16 @@ public class VisitService {
 
     public List<VisitDateDto> getAllVisits() {
         List<VisitEntity> visitEntities = visitEntityJpaRepository.findAll();
-        List<VisitDateDto> visitDateDtos = visitEntities.stream()
-                .map(visitEntity -> new VisitDateDto(visitEntity.getId(), visitEntity.getName(), visitEntity.getSurname(),
-                        visitEntity.getNumberPhone(), visitEntity.getVisitDate(),
-                        EffectType.valueOf(visitEntity.getEffectType()), visitEntity.getVariant(), visitEntity.getCreatedAt()))
-                .collect(Collectors.toList());
-        return visitDateDtos;
+        return mapToVisitDateDtos(visitEntities);
+
+    }
+
+    public List<VisitDateDto> getAllVisits(String from, String to) {
+        Date fromDate = StringUtils.convertStringToDate(from);
+        Date toDate = StringUtils.convertStringToDate(to);
+        List<VisitEntity> visitEntities = visitEntityJpaRepository.findAllByVisitDateAfterAndVisitDateBefore(fromDate, toDate);
+        return mapToVisitDateDtos(visitEntities);
+
     }
 
     public void addVisit(VisitDto visitDto) {
@@ -48,6 +54,16 @@ public class VisitService {
             visitEntityJpaRepository.deleteById(id);
 
         }
+    }
+
+    private List<VisitDateDto> mapToVisitDateDtos(List<VisitEntity> visitEntities) {
+        List<VisitDateDto> visitDateDtos = visitEntities.stream()
+                .map(visitEntity -> new VisitDateDto(visitEntity.getId(), visitEntity.getName(), visitEntity.getSurname(),
+                        visitEntity.getNumberPhone(), visitEntity.getVisitDate(),
+                        EffectType.valueOf(visitEntity.getEffectType()), visitEntity.getVariant(), visitEntity.getCreatedAt()))
+                .collect(Collectors.toList());
+        return visitDateDtos;
+
     }
 
 
